@@ -8,7 +8,7 @@
 <?php
    // <<-----------------Database Connection------------>> //
    require 'includes/data/database.php';
-   $sql = 'SELECT name, reason, operator, punishmentType, start, end FROM Punishments ORDER BY time DESC LIMIT 20';
+   $sql = 'SELECT name, reason, operator, punishmentType, start, end FROM Punishments ORDER BY start DESC LIMIT 20';
    $retval = $conn->query($sql);
    ?>
 <body>
