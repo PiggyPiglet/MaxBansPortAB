@@ -42,7 +42,7 @@
                 if($row['operator'] == null) {
                     $row['operator'] = 'Console';
                 }
-                // <<-----------------Ban Date Converter------------>> //
+                // <<-----------------Mute Date Converter------------>> //
                 $timeEpoch = $row['start'];
                 $timeConvert = $timeEpoch / 1000;
                 $timeResult = date('F j, Y, g:i a', $timeConvert);

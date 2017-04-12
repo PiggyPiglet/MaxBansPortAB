@@ -6,11 +6,11 @@
    <title>Warnings - <?php echo $name; ?></title>
 </head>
 <?php
-   // <<-----------------Database Connection------------>> //
-   require 'includes/data/database.php';
-   $sql = 'SELECT name, reason, banner, expires FROM warnings ORDER BY expires DESC LIMIT 20';
-   $retval = $conn->query($sql);
-   ?>
+    // <<-----------------Database Connection------------>> //
+    require 'includes/data/database.php';
+    $sql = 'SELECT * FROM Punishments WHERE punishmentType = "WARNING" ORDER BY start DESC LIMIT 20;';
+    $retval = $conn->query($sql);
+?>
 <body>
    <div class="container content">
    <div class="row">
@@ -31,30 +31,62 @@
             <th>
                <center>Warned Until</center>
             </th>
+            <th>
+               <center>Warned Until</center>
+            </th>
          </tr>
       </thead>
       <tbody>
-         <?php while($row = $retval->fetch_assoc()) { 
-            if($row['banner'] == null) {
-               $row['banner'] = 'Console';
-            }
-            // <<-----------------Expiration Time Converter------------>> //
-            $expiresEpoch = $row['expires'];
-            $expiresConvert = $expiresEpoch / 1000;
-            $expiresResult = date('F j, Y, g:i a', $expiresConvert);
-            ?>
-         <tr>
-            <td><?php echo "<img src='https://mcapi.ca/avatar/2d/" . $row['name'] . "/25' style='margin-bottom:5px;margin-right:5px;border-radius:2px;' />" . $row['name'];?></td>
-            <td><?php echo "<img src='https://mcapi.ca/avatar/2d/" . $row['banner'] . "/25'  style='margin-bottom:5px;margin-right:5px;border-radius:2px;' />" . $row['banner'];?></td>
-            <td style="width: 30%;"><?php echo $row['reason'];?></td>
-            <td><?php if($row['expires'] == 0) {
-               echo 'Permanent Warning';
-               } else {
-               echo $expiresResult; }?></td>
-         </tr>
-         <?php }
-            $conn->close();
-            echo "</tbody></table>";
-            ?>
+      <?php while($row = $retval->fetch_assoc()) {
+          if($row['operator'] == null) {
+              $row['operator'] = 'Console';
+          }
+          // <<-----------------Warning Date Converter------------>> //
+          $timeEpoch = $row['start'];
+          $timeConvert = $timeEpoch / 1000;
+          $timeResult = date('F j, Y, g:i a', $timeConvert);
+          // <<-----------------Expiration Time Converter------------>> //
+          $expiresEpoch = $row['end'];
+          $expiresConvert = $expiresEpoch / 1000;
+          $expiresResult = date('F j, Y, g:i a', $expiresConvert);
+          ?>
+          <tr>
+              <td>
+                  <?php
+                  echo "<img src='https://mcapi.ca/avatar/2d/" . $row['name'] . "/25' style='margin-bottom:5px;margin-right:5px;border-radius:2px;' />" . $row['name'];
+                  ?></td>
+              <td>
+                  <?php
+                  echo "<img src='https://mcapi.ca/avatar/2d/" . $row['operator'] . "/25'  style='margin-bottom:5px;margin-right:5px;border-radius:2px;' />" . $row['operator'];
+                  ?>
+              </td>
+              <td style="width: 30%;">
+                  <?php echo $row['reason'];?>
+              </td>
+              <td>
+                  <?php
+                  echo $timeResult;
+                  ?>
+              </td>
+              <td>
+                  <?php
+
+                  if($row['end'] == -1) {
+                      echo 'Permanent Warning';
+                  } else {
+                      echo $expiresResult;
+                  }
+
+                  ?>
+              </td>
+          </tr>
+          <?php
+      }
+      $conn->close();
+      ?>
+      </tbody>
+      </table>
    </div>
-   <?php include 'includes/footer.php'; ?>
+   </div>
+       <?php include 'includes/footer.php'; ?>
+   </div>
