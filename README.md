@@ -1,6 +1,8 @@
 # MaxBans Port - AdvancedBan
 
-This software is made by [Yive](http://yive.me), all credit goes to him. I have simply just changed it up a little bit to work with AdvancedBan.
+MaxBans is a popular bans plugin similar to AdvancedBan. A member of the community called Yive made an online banlist for maxbans that you could download and host yourself for an online banlist. This software is almost exactly the same as the original banlist, just with some changes to the code to make it work with AdvancedBan. 
+
+NOTE: This software is made by [Yive](http://yive.me), all credit goes to him. I have simply just changed it up a little bit to work with AdvancedBan.
 
 # Support
  
