@@ -19,7 +19,6 @@
                <ul class="dropdown-menu">
                   <li><a href="bans">Bans</a></li>
                   <li><a href="mutes">Mutes</a></li>
-                  <li><a href="ipbans">IP Bans</a></li>
                   <li><a href="warnings">Warnings</a></li>
                </ul>
             </li>
