@@ -71,7 +71,7 @@ $retval = $conn->query($sql);
                         <td>
                             <?php
 
-                            if($row['end'] == 0) {
+                            if($row['end'] == -1) {
                                 echo 'Permanent Ban';
                             } else {
                                 echo $expiresResult;
